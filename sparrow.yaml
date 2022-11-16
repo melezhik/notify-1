@@ -31,12 +31,14 @@ tasks:
       }
     followup:
       -
-        name: print-syslog    
+        name: check-syslog
+        check: |
+          regexp: "user.emerg notify[" \d+ "]: TEST: Hello, World!"
     depends:
       -
         name: install-go
       -
-        name: run-syslog
+        name: check-syslog
   -
     name: print-syslog
     language: Bash
