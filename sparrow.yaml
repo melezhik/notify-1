@@ -1,0 +1,47 @@
+tasks:
+  -
+    name: send-message
+    language: go
+    code:  |
+      package main
+
+      import (
+          "context"
+          "log"
+
+          sl "log/syslog"
+
+          "github.com/nikoksr/notify"
+          "github.com/nikoksr/notify/service/syslog"
+      )
+
+      func main() {
+          syslogSvc, err := syslog.New(sl.LOG_USER, "")
+          if err != nil {
+              log.Fatalf("syslog.New() failed: %v", err)
+          }
+
+          notify.UseServices(syslogSvc)
+
+          err = notify.Send(context.Background(), "TEST", "Hello, World!")
+          if err != nil {
+              log.Fatalf("notify.Send() failed: %v", err)
+          }
+      }
+      depends:
+        - 
+        name: install-notify
+  -
+    name: install-notify
+    language: bash
+    code: |
+      go get -u github.com/nikoksr/notify@HEAD
+    depends:
+      -
+        name: install-go
+  -
+    name: install-go
+    language: Bash
+    code: |
+      sudo apk add go \
+        --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
