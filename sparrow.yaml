@@ -29,12 +29,27 @@ tasks:
               log.Fatalf("notify.Send() failed: %v", err)
           }
       }
+    followup:
+      -
+        name: print-syslog    
     depends:
       -
         name: install-go
+      -
+        name: run-syslog
+  -
+    name: print-syslog
+    language: Bash
+    code: |
+        cat /tmp/syslog
   -
     name: install-go
     language: Bash
     code: |
       sudo apk add go \
         --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+  -
+    name: run-syslog
+    language: Bash
+    code: |
+        sudo nohup syslogd -n 1>/tmp/syslog 2>&1 &
