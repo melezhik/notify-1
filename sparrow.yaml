@@ -29,8 +29,8 @@ tasks:
               log.Fatalf("notify.Send() failed: %v", err)
           }
       }
-      depends:
-        - 
+    depends:
+      - 
         name: install-notify
   -
     name: install-notify
