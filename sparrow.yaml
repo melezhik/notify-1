@@ -1,6 +1,7 @@
 tasks:
   -
     name: send-message
+    default: true
     language: go
     code:  |
       package main
