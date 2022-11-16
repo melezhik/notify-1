@@ -32,18 +32,18 @@ tasks:
     followup:
       -
         name: check-syslog
-        check: |
-          regexp: "user.emerg notify[" \d+ "]: TEST: Hello, World!"
     depends:
       -
         name: install-go
       -
-        name: check-syslog
+        name: run-syslog
   -
-    name: print-syslog
+    name: check-syslog
     language: Bash
     code: |
         sudo cat /var/log/messages
+    check: |
+      regexp: "user.emerg notify[" \d+ "]: TEST: Hello, World!"
   -
     name: install-go
     language: Bash
