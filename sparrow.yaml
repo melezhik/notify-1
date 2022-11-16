@@ -41,7 +41,7 @@ tasks:
     name: print-syslog
     language: Bash
     code: |
-        cat /tmp/syslog
+        sudo cat /var/log/messages
   -
     name: install-go
     language: Bash
