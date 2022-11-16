@@ -30,14 +30,6 @@ tasks:
           }
       }
     depends:
-      - 
-        name: install-notify
-  -
-    name: install-notify
-    language: bash
-    code: |
-      go get -u github.com/nikoksr/notify@HEAD
-    depends:
       -
         name: install-go
   -
